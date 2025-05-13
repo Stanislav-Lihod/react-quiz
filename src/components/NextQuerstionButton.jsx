@@ -1,9 +1,13 @@
-export default function NextQuerstionButton({dispatch, currentAnswer, step, numOfQuerstions}) {
+import { useQuiz } from "../context/QuizProvider"
+
+export default function NextQuerstionButton() {
+  const {nextStep, finishQuiz, currentAnswer, step, numOfQuerstions} = useQuiz()
+  
   if (currentAnswer === null) return
 
   if (step < numOfQuerstions - 1) {
     return (
-      <button className="btn btn-ui" onClick={()=>dispatch({type: 'nextStep'})}>
+      <button className="btn btn-ui" onClick={nextStep}>
         Next
       </button>
     )
@@ -11,7 +15,7 @@ export default function NextQuerstionButton({dispatch, currentAnswer, step, numO
 
   if (step === numOfQuerstions - 1) {
     return (
-      <button className="btn btn-ui" onClick={()=>dispatch({type: 'finishQuiz'})}>
+      <button className="btn btn-ui" onClick={finishQuiz}>
         Finish
       </button>
     )
